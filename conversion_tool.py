@@ -1,16 +1,20 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 26 19:58:03 2023
-
-@author: Mosco
-"""
-
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
 class ConversionTool(tk.Tk):
+    """
+    ConversionTool is a tkinter-based GUI for performing unit conversions.
+    
+    Supported conversions:
+    - Length: km, m, cm, mm, mi, yd, ft, in
+    - Weight: kg, g, lb, oz
+    - Temperature: C, F, K
+    """
     def __init__(self):
+        """
+        Initialize the ConversionTool application.
+        """
         super().__init__()
 
         self.title('Unit Conversion Tool')
@@ -24,15 +28,48 @@ class ConversionTool(tk.Tk):
         self.setup_ui()
 
     def length_conversion(self, from_unit, to_unit, value):
+        """
+        Convert a length value from one unit to another.
+        
+        Parameters:
+        from_unit (str): The original unit of the length.
+        to_unit (str): The target unit for the conversion.
+        value (float): The length value to convert.
+        
+        Returns:
+        float: The converted length value.
+        """
         length_dict = {'km': 1000.0, 'm': 1.0, 'cm': 0.01, 'mm': 0.001, 
                        'mi': 1609.34, 'yd': 0.9144, 'ft': 0.3048, 'in': 0.0254}
         return (value * length_dict[from_unit]) / length_dict[to_unit]
 
     def weight_conversion(self, from_unit, to_unit, value):
+        """
+        Convert a weight value from one unit to another.
+        
+        Parameters:
+        from_unit (str): The original unit of the weight.
+        to_unit (str): The target unit for the conversion.
+        value (float): The weight value to convert.
+        
+        Returns:
+        float: The converted weight value.
+        """
         weight_dict = {'kg': 1.0, 'g': 0.001, 'lb': 0.453592, 'oz': 0.0283495}
         return (value * weight_dict[from_unit]) / weight_dict[to_unit]
 
     def temperature_conversion(self, from_unit, to_unit, value):
+        """
+        Convert a temperature value from one unit to another.
+        
+        Parameters:
+        from_unit (str): The original unit of the temperature.
+        to_unit (str): The target unit for the conversion.
+        value (float): The temperature value to convert.
+        
+        Returns:
+        float: The converted temperature value.
+        """
         if from_unit == 'C':
             if to_unit == 'F':
                 return (value * 9/5) + 32
@@ -51,6 +88,9 @@ class ConversionTool(tk.Tk):
         return value
 
     def calculate(self):
+        """
+        Perform the unit conversions based on the current entries and update the result labels.
+        """
         for name, entry, result, from_, to_ in self.entries:
             value = entry.get()
             if not value:  # Skip if the entry is empty
@@ -63,6 +103,9 @@ class ConversionTool(tk.Tk):
                 tk.messagebox.showerror('Error', f'Invalid input for {name} conversion')
 
     def setup_ui(self):
+        """
+        Setup the user interface components.
+        """
         options = {
             'Length': ['km', 'm', 'cm', 'mm', 'mi', 'yd', 'ft', 'in'],
             'Weight': ['kg', 'g', 'lb', 'oz'],
