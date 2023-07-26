@@ -14,6 +14,7 @@ Run the application by typing the following command in your terminal or command 
 
 ```bash
 python3 conversion_tool.py
+```
 
 ## Specification
 The application presents three sections for unit conversion:
